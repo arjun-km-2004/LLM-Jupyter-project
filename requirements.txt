@@ -1,0 +1,29 @@
+# Financial Image Scanner - Requirements
+# AI-Powered Financial Document Analysis System
+
+# Core Requirements
+flask>=2.3.0
+pillow>=10.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.31.0
+werkzeug>=2.3.0
+
+# Image Processing and OCR (Optional but recommended)
+pytesseract>=0.3.10
+opencv-python>=4.8.0
+
+# LLM Integration (Optional - choose one or both)
+openai>=1.0.0
+anthropic>=0.7.0
+
+# Data Analysis and Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Development and Testing
+pytest>=7.4.0
+pytest-flask>=1.2.0
+
+# Production Server
+gunicorn>=21.2.0

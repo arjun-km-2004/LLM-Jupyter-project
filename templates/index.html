@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Image Scanner - AI-Powered Financial Document Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-2xl text-indigo-600 mr-3"></i>
+                    <span class="font-bold text-xl">Financial Image Scanner</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/upload" class="text-gray-700 hover:text-indigo-600">Upload</a>
+                    <a href="/demo" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Try Demo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                AI-Powered Financial Document Analysis
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Transform financial documents into actionable insights with advanced OCR, chart analysis, and intelligent reporting
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/upload" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-upload mr-2"></i>Start Analysis
+                </a>
+                <a href="/demo" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition">
+                    <i class="fas fa-play mr-2"></i>View Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Advanced Financial Analysis Features
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Our AI-powered system extracts and analyzes critical financial information from documents, charts, and graphs
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-eye feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">OCR & Image Processing</h3>
+                    <p class="text-gray-600 mb-4">
+                        Advanced optical character recognition extracts text and numbers from financial documents with high accuracy
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Multi-format support</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>High accuracy OCR</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>URL and local files</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-chart-bar feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Chart & Graph Analysis</h3>
+                    <p class="text-gray-600 mb-4">
+                        Intelligent analysis of financial charts, graphs, and visual data representations
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Trend detection</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Pattern recognition</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Visual insights</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-brain feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">AI-Powered Analysis</h3>
+                    <p class="text-gray-600 mb-4">
+                        Advanced LLM integration provides intelligent financial insights and recommendations
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Context-aware insights</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Investment recommendations</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Risk assessment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="bg-gray-100 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    How It Works
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Get comprehensive financial analysis in three simple steps
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="bg-indigo-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Upload Documents</h3>
+                    <p class="text-gray-600">
+                        Upload financial document images or provide URLs. Support for PNG, JPG, PDF and more formats.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="bg-indigo-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">AI Processing</h3>
+                    <p class="text-gray-600">
+                        Our system extracts text, analyzes charts, and processes financial data using advanced AI.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="bg-indigo-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Get Report</h3>
+                    <p class="text-gray-600">
+                        Receive comprehensive financial analysis with insights, trends, and investment recommendations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Output Preview -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Sample Analysis Output
+                </h2>
+                <p class="text-xl text-gray-600">
+                    See the type of comprehensive analysis you'll receive
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Key Financial Metrics</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-4 rounded">
+                            <p class="font-semibold">Net Profit:</p>
+                            <p class="text-lg">EUR 690 million</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded">
+                            <p class="font-semibold">Return on Equity:</p>
+                            <p class="text-lg">11.6%</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded">
+                            <p class="font-semibold">Earnings Per Share:</p>
+                            <p class="text-lg">EUR 0.78</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded">
+                            <p class="font-semibold">Cost/Income Ratio:</p>
+                            <p class="text-lg">59.2%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Investment Recommendation</h3>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                        <p class="font-semibold text-green-800">OVERWEIGHT</p>
+                        <p class="text-green-700">Strong financial performance with positive momentum across key metrics</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="/demo" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">
+                        <i class="fas fa-play mr-2"></i>Try Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="mb-4">© 2024 Financial Image Scanner. AI-Powered Financial Document Analysis.</p>
+                <p class="text-gray-400">Transform financial documents into actionable insights with advanced AI technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

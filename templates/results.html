@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Financial Image Scanner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .section-content {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .section-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .section-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        .section-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-2xl text-indigo-600 mr-3"></i>
+                    <span class="font-bold text-xl">Financial Image Scanner</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/upload" class="text-gray-700 hover:text-indigo-600">Upload</a>
+                    <a href="/demo" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Try Demo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Results Header -->
+    <section class="gradient-bg text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">
+                    Financial Analysis Results
+                </h1>
+                <p class="text-xl mb-4">
+                    {{ results.session_data.company_name }} - {{ results.session_data.report_type.replace('_', ' ').title() }}
+                </p>
+                <div class="flex justify-center gap-4 text-sm">
+                    <span><i class="fas fa-calendar mr-2"></i>{{ results.report.metadata.generation_date }}</span>
+                    <span><i class="fas fa-images mr-2"></i>{{ results.processing_results.images_processed }} images processed</span>
+                    <span><i class="fas fa-chart-bar mr-2"></i>{{ results.processing_results.metrics_extracted }} metrics extracted</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-file-alt mr-2 text-indigo-600"></i>
+                    Executive Summary
+                </h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 leading-relaxed">{{ results.report.executive_summary.summary_text }}</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-indigo-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-indigo-900 mb-3">Overall Assessment</h3>
+                        <p class="text-indigo-700">{{ results.report.executive_summary.overall_assessment }}</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-green-900 mb-3">Key Highlights</h3>
+                        <ul class="text-green-700 space-y-1">
+                            {% for highlight in results.report.executive_summary.key_highlights %}
+                                <li class="text-sm">• {{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-blue-900 mb-3">Chart Insights</h3>
+                        <ul class="text-blue-700 space-y-1">
+                            {% for insight in results.report.executive_summary.chart_insights %}
+                                <li class="text-sm">• {{ insight }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Recommendation -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
+                    Investment Recommendation
+                </h2>
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border-l-4 border-indigo-500 p-6 rounded">
+                    <div class="prose max-w-none">
+                        <p class="text-gray-800 font-medium">{{ results.report.investment_recommendation }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Analysis Sections -->
+    <section class="py-12 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Key Financial Metrics -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-chart-line mr-2 text-indigo-600"></i>
+                    Key Financial Metrics
+                </h2>
+                <div class="section-content">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                        {% for bullet in results.report.key_financial_metrics.bullet_points %}
+                            <div class="metric-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="text-sm text-gray-600">
+                        {{ results.report.key_financial_metrics.summary_text }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Income and Expenses -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-dollar-sign mr-2 text-green-600"></i>
+                    Income and Expenses
+                </h2>
+                <div class="section-content">
+                    <div class="space-y-3 mb-6">
+                        {% for bullet in results.report.income_expenses.bullet_points %}
+                            <div class="flex items-start">
+                                <span class="text-green-600 mr-3">●</span>
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded">
+                        <p class="text-green-800 text-sm">{{ results.report.income_expenses.analysis_text }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance Sheet Highlights -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-balance-scale mr-2 text-blue-600"></i>
+                    Balance Sheet Highlights
+                </h2>
+                <div class="section-content">
+                    <div class="space-y-3 mb-6">
+                        {% for bullet in results.report.balance_sheet_highlights.bullet_points %}
+                            <div class="flex items-start">
+                                <span class="text-blue-600 mr-3">●</span>
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded">
+                        <p class="text-blue-800 text-sm">{{ results.report.balance_sheet_highlights.summary_text }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credit Quality -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-shield-alt mr-2 text-purple-600"></i>
+                    Credit Quality
+                </h2>
+                <div class="section-content">
+                    <div class="space-y-3 mb-6">
+                        {% for bullet in results.report.credit_quality.bullet_points %}
+                            <div class="flex items-start">
+                                <span class="text-purple-600 mr-3">●</span>
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="bg-purple-50 p-4 rounded">
+                        <p class="text-purple-800 text-sm">{{ results.report.credit_quality.risk_assessment }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategic Updates -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-rocket mr-2 text-orange-600"></i>
+                    Strategic and Operational Updates
+                </h2>
+                <div class="section-content">
+                    <div class="space-y-3">
+                        {% for bullet in results.report.strategic_operational_updates.bullet_points %}
+                            <div class="flex items-start">
+                                <span class="text-orange-600 mr-3">●</span>
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Outlook -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-globe mr-2 text-teal-600"></i>
+                    Market Conditions and Outlook
+                </h2>
+                <div class="section-content">
+                    <div class="space-y-3 mb-6">
+                        {% for bullet in results.report.market_conditions_outlook.bullet_points %}
+                            <div class="flex items-start">
+                                <span class="text-teal-600 mr-3">●</span>
+                                <p class="text-gray-700">{{ bullet }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="bg-teal-50 p-4 rounded">
+                        <p class="text-teal-800 text-sm">{{ results.report.market_conditions_outlook.forward_guidance }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processing Information -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-info-circle mr-2 text-indigo-600"></i>
+                    Processing Information
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-indigo-600">{{ results.processing_results.images_processed }}</div>
+                        <p class="text-gray-600">Images Processed</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600">{{ results.processing_results.metrics_extracted }}</div>
+                        <p class="text-gray-600">Metrics Extracted</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-600">{{ results.processing_results.charts_analyzed }}</div>
+                        <p class="text-gray-600">Charts Analyzed</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-600">
+                            {% if results.report.appendices.processing_info.llm_used %}AI{% else %}Rule{% endif %}
+                        </div>
+                        <p class="text-gray-600">Analysis Method</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="py-12 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/download/{{ session_id }}" 
+                       class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+                        <i class="fas fa-download mr-2"></i>Download Report
+                    </a>
+                    <a href="/upload" 
+                       class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                        <i class="fas fa-plus mr-2"></i>Analyze New Documents
+                    </a>
+                    <button onclick="window.print()" 
+                            class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+                        <i class="fas fa-print mr-2"></i>Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2024 Financial Image Scanner. AI-Powered Financial Document Analysis.</p>
+                <p class="text-sm text-gray-500 mt-2">Report generated on {{ results.report.metadata.generation_date }}</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success message
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                toast.textContent = 'Copied to clipboard!';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            });
+        }
+
+        // Add copy buttons to key sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('h2');
+            sections.forEach(section => {
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'ml-2 text-gray-400 hover:text-gray-600 text-sm';
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                copyBtn.onclick = () => {
+                    const content = section.nextElementSibling.textContent;
+                    copyToClipboard(content);
+                };
+                section.appendChild(copyBtn);
+            });
+        });
+    </script>
+</body>
+</html>
